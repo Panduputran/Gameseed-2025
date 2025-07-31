@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8ymlyastaxar"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jh644"]
+albedo_color = Color(0.31802, 0.31802, 0.31802, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wgajw"]
+material = SubResource("StandardMaterial3D_jh644")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfc5y"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uclm"]
+albedo_color = Color(0.969797, 0.914257, 7.70092e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lo5fy"]
+material = SubResource("StandardMaterial3D_8uclm")
+size = Vector3(0.3, 0.5, 5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_34bgl"]
+data = PackedVector3Array(-0.15, 0.25, 2.5, 0.15, 0.25, 2.5, -0.15, -0.25, 2.5, 0.15, 0.25, 2.5, 0.15, -0.25, 2.5, -0.15, -0.25, 2.5, 0.15, 0.25, -2.5, -0.15, 0.25, -2.5, 0.15, -0.25, -2.5, -0.15, 0.25, -2.5, -0.15, -0.25, -2.5, 0.15, -0.25, -2.5, 0.15, 0.25, 2.5, 0.15, 0.25, -2.5, 0.15, -0.25, 2.5, 0.15, 0.25, -2.5, 0.15, -0.25, -2.5, 0.15, -0.25, 2.5, -0.15, 0.25, -2.5, -0.15, 0.25, 2.5, -0.15, -0.25, -2.5, -0.15, 0.25, 2.5, -0.15, -0.25, 2.5, -0.15, -0.25, -2.5, 0.15, 0.25, 2.5, -0.15, 0.25, 2.5, 0.15, 0.25, -2.5, -0.15, 0.25, 2.5, -0.15, 0.25, -2.5, 0.15, 0.25, -2.5, -0.15, -0.25, 2.5, 0.15, -0.25, 2.5, -0.15, -0.25, -2.5, 0.15, -0.25, 2.5, 0.15, -0.25, -2.5, -0.15, -0.25, -2.5)
+
+[node name="MainMap" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_wgajw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_hfc5y")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.23246, 0.215068, 0)
+mesh = SubResource("BoxMesh_lo5fy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.23246, 0.215068, 0)
+shape = SubResource("ConcavePolygonShape3D_34bgl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0355814, -0.669027, 0.742386, -0.0320286, 0.743238, 0.66826, -0.998854, 0, -0.0478735, 38.0101, 31.702, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0569624, 0.668873, -0.741191, -0.0320287, 0.743238, 0.66826, 0.997863, -0.0143263, 0.0637597, -54.6905, 31.702, 0)
