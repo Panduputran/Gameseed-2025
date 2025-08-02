@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg2sejo128crw"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_smnhq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5q34g"]
+
+[node name="Bullet" type="RigidBody3D"]
+transform = Transform3D(0.0145665, 0, -0.136767, 0, 0.13816, 0, 0.139717, 0, 0.014259, 0, 0, 0)
+script = ExtResource("1_smnhq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.112081, 0, 3.72529e-09, 0, 0.10949, 0, -1.30385e-08, 0, 0.10712, 0, 0, 0)
+mesh = SubResource("SphereMesh_5q34g")

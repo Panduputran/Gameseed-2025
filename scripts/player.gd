@@ -7,26 +7,38 @@ extends CharacterBody3D
 
 var current_speed = walk_speed
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-@onready var camera: Camera3D = $Camera3D # Dapatkan referensi ke Camera3D menggunakan @onready
+@onready var camera: Camera3D = $Camera3D
 
 func _ready():
 	# Mengunci kursor mouse ke tengah layar dan menyembunyikannya
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
-	# Mengendalikan rotasi kamera dengan mouse
+	# === Bagian 1: Rotasi Kamera dengan Mouse ===
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity) # Rotasi Y (yaw) untuk kiri/kanan
 		camera.rotate_x(-event.relative.y * mouse_sensitivity) # Rotasi X (pitch) untuk atas/bawah
-		# Batasi rotasi vertikal kamera agar tidak berputar 360 derajat
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		return # Keluar dari fungsi _input jika event adalah gerakan mouse
 
-	# Melepaskan kursor mouse dengan tombol ESC
-	if event.is_action_pressed("ui_cancel"):
+	# === Bagian 2: Melepaskan kursor mouse dengan tombol ESC ===
+	# Gunakan singleton Input untuk memeriksa aksi
+	if Input.is_action_just_pressed("ui_cancel"): # <--- PERBAIKAN DI SINI
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	# === Bagian 3: Logika Interaksi ===
+	# Gunakan singleton Input untuk memeriksa aksi
+	if Input.is_action_just_pressed("interact"): # <--- PERBAIKAN DI SINI
+		print("Interact button 'F' pressed!")
+		if GlobalSignals.get_interactable_object() != null:
+			var obj_to_interact = GlobalSignals.get_interactable_object()
+			print("Trying to interact with: ", obj_to_interact.name)
+			obj_to_interact.interact()
+		else:
+			print("No interactable object in range.")
 
 func _physics_process(delta):
 	# Gravitasi
@@ -44,7 +56,6 @@ func _physics_process(delta):
 
 	# Arah input dan pergerakan
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	# Menggunakan transform.basis untuk mengubah input 2D menjadi arah 3D relatif terhadap orientasi player
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
