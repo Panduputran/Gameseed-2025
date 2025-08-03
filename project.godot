@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="GameSeed - 2025"
-run/main_scene="res://scenes/game_main.tscn"
+run/main_scene="res://scenes/ui/intro.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GlobalSignals="*res://scripts/Global/GlobalSignals.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [input]
 
