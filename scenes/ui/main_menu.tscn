@@ -1171,15 +1171,11 @@ scale = Vector2(0.65283, 0.626514)
 sprite_frames = SubResource("SpriteFrames_dedoq")
 autoplay = "default"
 
-[node name="Settings" parent="." instance=ExtResource("5_swdh0")]
-visible = false
-layout_mode = 1
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_8hgau")
 volume_db = 0.215
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="MusicMain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_qewnx")
 autoplay = true
 
@@ -1236,6 +1232,10 @@ offset_left = -56.0
 offset_top = -20.0
 offset_right = 50.0
 offset_bottom = 18.0
+
+[node name="Settings" parent="." instance=ExtResource("5_swdh0")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="MenuContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MenuContainer/Button2" to="." method="_on_button_2_pressed"]

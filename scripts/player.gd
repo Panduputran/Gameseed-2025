@@ -4,14 +4,20 @@ extends CharacterBody3D
 @export var sprint_speed = 8.0 # Kecepatan berlari
 @export var jump_velocity = 4.5 # Kekuatan lompat
 @export var mouse_sensitivity = 0.002 # Sensitivitas mouse
+@onready var ui_player: Control = $"UI Player"
+
+@onready var pause: Control = $Pause
 
 var current_speed = walk_speed
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera: Camera3D = $Camera3D
 
+
+
 func _ready():
 	# Mengunci kursor mouse ke tengah layar dan menyembunyikannya
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _input(event):
 	# === Bagian 1: Rotasi Kamera dengan Mouse ===
@@ -24,10 +30,13 @@ func _input(event):
 	# === Bagian 2: Melepaskan kursor mouse dengan tombol ESC ===
 	# Gunakan singleton Input untuk memeriksa aksi
 	if Input.is_action_just_pressed("ui_cancel"): # <--- PERBAIKAN DI SINI
+		ui_player.visible = false
+		pause.visible = true
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 
 	# === Bagian 3: Logika Interaksi ===
 	# Gunakan singleton Input untuk memeriksa aksi

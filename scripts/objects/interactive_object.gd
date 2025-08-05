@@ -1,6 +1,6 @@
 # interactive_object.gd
 extends Area3D
-class_name InteractiveObject # Tambahkan baris ini!
+class_name InteractiveObject
 
 @export var message = "You interacted with an object!"
 
@@ -21,5 +21,11 @@ func _on_body_exited(body: Node3D):
 
 func interact():
 	print(message)
+	# This is the line that needs to change.
+	# Instead of just freeing the object, we also tell the GlobalSignals
+	# to change the scene.
+	GlobalSignals.change_scene_and_interact()
+	
+	# The object is now "taken," so we free it.
 	queue_free()
 	GlobalSignals.set_interactable_object(null)
