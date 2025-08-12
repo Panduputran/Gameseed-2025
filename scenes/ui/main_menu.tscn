@@ -1167,9 +1167,11 @@ script = ExtResource("1_0tt6t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(574, 320)
-scale = Vector2(0.65283, 0.626514)
+scale = Vector2(0.654257, 0.626514)
 sprite_frames = SubResource("SpriteFrames_dedoq")
 autoplay = "default"
+frame = 150
+frame_progress = 0.0653045
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_8hgau")
